@@ -41,14 +41,25 @@ public class SitesController {
   private void initialize() {
     // TODO exercice 7 : câbler la vue sur le ViewModel.
     //
-    // 1. Pour chaque colonne, définir une cell value factory qui lit le champ du Site
-    //    (numeroCarre, nomConvivial, protocole).
+    // 1. Pour chaque colonne, définir une cell value factory qui lit le champ du
+    // Site
+    // colNumero.setCellValueFactory(c -> new
+    // SimpleStringProperty(c.getValue().numeroCarre()));
+    // (numeroCarre, nomConvivial, protocole).
     // 2. Donner ses items à la TableView : setItems + viewModel.sitesProperty().
+    tableSites.setItems(viewModel.sitesProperty());
     // 3. Lier le texte de labelResume au resumeProperty() du ViewModel.
+    labelResume.textProperty().bind(viewModel.resumeProperty());
     // 4. Remplir choiceProtocole avec les deux protocoles ("PointFixeStandard",
-    //    "PointFixeRecherche").
+    // "PointFixeRecherche").
+    choiceProtocole.getItems().set(0, "PointFixeStandard");
+    choiceProtocole.getItems().set(1, "PointFixeRecherche");
     // 5. Désactiver boutonSupprimer tant qu'aucune ligne n'est sélectionnée
-    //    (disableProperty lié à selectedItemProperty().isNull() du selection model).
+    // (disableProperty lié à selectedItemProperty().isNull() du selection model).
+    // selectedItemProperty().isNull());
+    boutonSupprimer
+        .disableProperty()
+        .bind(tableSites.getSelectionModel().selectedItemProperty().isNull());
   }
 
   @FXML
