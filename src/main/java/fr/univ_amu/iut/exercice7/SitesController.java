@@ -5,6 +5,7 @@ import fr.univ_amu.iut.exercice4.Site;
 import fr.univ_amu.iut.jdbc.DataAccessException;
 import java.time.LocalDate;
 import java.util.Optional;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -43,8 +44,9 @@ public class SitesController {
     //
     // 1. Pour chaque colonne, définir une cell value factory qui lit le champ du
     // Site
-    // colNumero.setCellValueFactory(c -> new
-    // SimpleStringProperty(c.getValue().numeroCarre()));
+    colNumero.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().numeroCarre()));
+    colNom.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().nomConvivial()));
+    colProtocole.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().protocole()));
     // (numeroCarre, nomConvivial, protocole).
     // 2. Donner ses items à la TableView : setItems + viewModel.sitesProperty().
     tableSites.setItems(viewModel.sitesProperty());
@@ -52,8 +54,7 @@ public class SitesController {
     labelResume.textProperty().bind(viewModel.resumeProperty());
     // 4. Remplir choiceProtocole avec les deux protocoles ("PointFixeStandard",
     // "PointFixeRecherche").
-    choiceProtocole.getItems().set(0, "PointFixeStandard");
-    choiceProtocole.getItems().set(1, "PointFixeRecherche");
+    choiceProtocole.getItems().setAll("PointFixeStandard", "PointFixeRecherche");
     // 5. Désactiver boutonSupprimer tant qu'aucune ligne n'est sélectionnée
     // (disableProperty lié à selectedItemProperty().isNull() du selection model).
     // selectedItemProperty().isNull());
